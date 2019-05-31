@@ -1,0 +1,84 @@
+<h4 *ngIf="this.isNewPatient">New patient contact details</h4>
+<h4 *ngIf="!this.isNewPatient">Update patient contact details</h4>
+
+<div class="container">
+  <form [formGroup]="patientForm" novalidate (ngSubmit)="save(patientForm.value)">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="firstname">First Name</label>
+        <input
+          type="text"
+          aria-label="First name"
+          class="form-control"
+          name="firstname"
+          #firstname
+          formControlName="firstname"
+          placeholder="First name"
+          [ngClass]="{
+            'is-invalid':
+              patientForm.controls.firstname.errors?.required &&
+              patientForm.controls.firstname.touched
+          }"
+        />
+        <div
+          *ngIf="patientForm.get('firstname').errors && patientForm.get('firstname').touched"
+          class="text-danger"
+        >
+          First Name is required
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputPassword4">Last Name</label>
+        <input
+          type="text"
+          aria-label="Last name"
+          class="form-control"
+          name="lastname"
+          formControlName="lastname"
+          placeholder="Last name"
+          [ngClass]="{
+            'is-invalid':
+              patientForm.controls.lastname.errors?.required &&
+              patientForm.controls.lastname.touched
+          }"
+        />
+        <div
+          *ngIf="patientForm.get('lastname').errors && patientForm.get('lastname').touched"
+          class="text-danger"
+        >
+          Last Name is required
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputEmail4">Email</label>
+        <input
+          type="text"
+          aria-label="Email"
+          class="form-control"
+          name="email"
+          formControlName="email"
+          placeholder="Email"
+          [ngClass]="{
+            'is-invalid':
+              (patientForm.get('email').hasError('required') ||
+                patientForm.get('email').hasError('email')) &&
+              patientForm.get('email').touched
+          }"
+        />
+        <div *ngIf="f.email.errors && f.email.touched">
+          <div *ngIf="patientForm.get('email').hasError('required')" class="text-danger">
+            Email is required
+          </div>
+        </div>
+        <div *ngIf="patientForm.get('email').hasError('email')" class="text-danger">
+          Email is in the wrong format
+        </div>
+      </div>
+    </div>
+    <button *ngIf="isNewPatient" type="submit" class="btn btn-primary">Register</button>
+    <button *ngIf="!isNewPatient" type="submit" class="btn btn-primary">Update</button>
+    <a routerLink="/patient/list" class="cancelLink">Cancel</a>
+  </form>
+</div>

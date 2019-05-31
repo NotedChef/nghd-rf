@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'nghd-root',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'reactiveformsdemo';
+  title = 'Westeros County General';
+
+  public constructor(private titleService: Title) {
+    this.titleService.setTitle(this.title);
+  }
 }

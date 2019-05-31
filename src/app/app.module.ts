@@ -1,18 +1,31 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
+import { PatientListComponent } from './patient/patient-list/patient-list.component';
+import { PatientTableComponent } from './patient/patient-table/patient-table.component';
+import { PatientEditComponent } from './patient/patient-edit/patient-edit.component';
+import { AddressEditComponent } from './address/address-edit/address-edit.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PatientListComponent,
+    PatientTableComponent,
+    PatientEditComponent,
+    AddressEditComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    NgbModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

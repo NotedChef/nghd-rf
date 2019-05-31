@@ -1,0 +1,27 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let patient of patients">
+      <td>{{ patient.firstname }}</td>
+      <td>{{ patient.lastname }}</td>
+      <td>{{ patient.email }}</td>
+      <td class="patient-buttons">
+        <button class="btn btn-primary" [routerLink]="['/patient', 'edit', patient.id]">
+          Edit
+        </button>
+        <!-- <button class="btn btn-warning" [routerLink]="['/patientnested', 'edit', patient.id]">
+          Edit Nested
+        </button> -->
+        <!-- <button class="btn btn-danger" (click)="deletePatient(patient)"> Delete </button> -->
+      </td>
+    </tr>
+  </tbody>
+</table>
