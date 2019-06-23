@@ -4,14 +4,20 @@
       "firstname": "Arya",
       "lastname": "Stark",
       "email": "catofthecanals@westeros.com",
-      "addresses": [],
-      "id": 1
+      "ailments": [
+        "Blinded"
+      ],
+      "id": 1,
+      "addresses": []
     },
     {
       "id": 2,
       "firstname": "Danny",
       "lastname": "Targaryen",
       "email": "motherofdragons@westeros.com",
+      "ailments": [
+        "Delusions of Grandeur"
+      ],
       "addresses": []
     },
     {
@@ -19,6 +25,9 @@
       "firstname": "Bran",
       "lastname": "Stark",
       "email": "3eyedraven@westeros.com",
+      "ailments": [
+        "Broken back"
+      ],
       "addresses": []
     },
     {
@@ -26,98 +35,73 @@
       "firstname": "Sansa",
       "lastname": "Stark",
       "email": "littlebird@westeros.com",
+      "ailments": [
+        "Assault"
+      ],
       "addresses": []
     },
     {
-      "id": 5,
       "firstname": "Jon",
       "lastname": "Snow",
       "email": "iknownothing@westeros.com",
-      "addresses": []
+      "ailments": [
+        "Dead-ish",
+        "Lovestruck",
+        "Multiple contusions"
+      ],
+      "addresses": [],
+      "id": 5
     },
     {
       "id": 6,
       "firstname": "Robb",
       "lastname": "Stark",
       "email": "wolfpup@westeros.com",
+      "ailments": [
+        "Rigor"
+      ],
       "addresses": []
     },
     {
-      "id": 7,
       "firstname": "Viserys",
       "lastname": "Targaryen",
       "email": "beggarking@westeros.com",
+      "ailments": [
+        "Sore throat"
+      ],
+      "id": 7,
       "addresses": []
     },
     {
-      "id": 8,
       "firstname": "Eddard",
       "lastname": "Stark",
       "email": "quietwolf@westeros.com",
-      "addresses": []
+      "ailments": [
+        "Headless"
+      ],
+      "addresses": [],
+      "id": 8
     },
     {
-      "id": 9,
-      "firstname": "Robert",
-      "lastname": "Baratheon",
-      "email": "usurper@westeros.com",
-      "addresses": []
-    },
-    {
-      "id": 10,
-      "firstname": "Stannis",
-      "lastname": "Baratheon",
-      "email": "kingofdragonstone@westeros.com",
-      "addresses": []
-    },
-    {
-      "id": 11,
-      "firstname": "Renly",
-      "lastname": "Baratheon",
-      "email": "kinginhighgarden@westeros.com",
-      "addresses": []
-    },
-    {
-      "id": 12,
-      "firstname": "Catlyn",
-      "lastname": "Stark",
-      "email": "ladycat@westeros.com",
-      "addresses": []
-    },
-    {
-      "id": 13,
-      "firstname": "Jaimie",
+      "firstname": "Jaime",
       "lastname": "Lannister",
       "email": "kingslayer@westeros.com",
-      "addresses": []
-    },
-    {
-      "firstname": "Cersei",
-      "lastname": "Lannister",
-      "email": "TheLightOfTheWest@westeros.com",
-      "addresses": [],
-      "id": 14
-    },
-    {
-      "firstname": "Tommen",
-      "lastname": "Baratheon",
-      "email": "boyking@gmail.com",
-      "addresses": [],
-      "id": 15
-    },
-    {
-      "firstname": "Joffrey",
-      "lastname": "Baratheon",
-      "email": "theyoungusurper@westeros.com",
-      "addresses": [],
-      "id": 16
-    },
-    {
-      "firstname": "Tyron",
-      "lastname": "Lannister",
-      "email": "theimp@westeros.com",
-      "addresses": [],
-      "id": 17
+      "ailments": [
+        "Crush injuries",
+        "Amputation"
+      ],
+      "addresses": [
+        {
+          "addressType": "Residential",
+          "isPrimary": true,
+          "street": "1 The Keep",
+          "city": "Kingslanding",
+          "postcode": "3000",
+          "state": "VIC",
+          "country": "Westeros"
+        }
+      ],
+      "id": 9
     }
   ]
 }

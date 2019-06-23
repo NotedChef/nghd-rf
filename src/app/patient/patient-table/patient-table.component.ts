@@ -7,7 +7,6 @@ import { Patient } from '../patient';
   styleUrls: ['./patient-table.component.scss']
 })
 export class PatientTableComponent implements OnInit {
-
   @Input() patients: Patient[];
   @Output() patientDeleted: EventEmitter<Patient> = new EventEmitter<Patient>();
 
@@ -17,5 +16,9 @@ export class PatientTableComponent implements OnInit {
 
   deletePatient(patient: Patient) {
     this.patientDeleted.emit(patient);
+  }
+
+  getDescription(ailments: string[]): string {
+    return ailments.join(', ');
   }
 }

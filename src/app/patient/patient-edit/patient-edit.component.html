@@ -1,84 +1,370 @@
-<h4 *ngIf="this.isNewPatient">New patient contact details</h4>
-<h4 *ngIf="!this.isNewPatient">Update patient contact details</h4>
+<h2>{{ pageTitle }}</h2>
+<br /><br />
 
-<div class="container">
-  <form [formGroup]="patientForm" novalidate (ngSubmit)="save(patientForm.value)">
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="firstname">First Name</label>
-        <input
-          type="text"
-          aria-label="First name"
-          class="form-control"
-          name="firstname"
-          #firstname
-          formControlName="firstname"
-          placeholder="First name"
-          [ngClass]="{
-            'is-invalid':
-              patientForm.controls.firstname.errors?.required &&
-              patientForm.controls.firstname.touched
-          }"
-        />
-        <div
-          *ngIf="patientForm.get('firstname').errors && patientForm.get('firstname').touched"
-          class="text-danger"
-        >
-          First Name is required
-        </div>
-      </div>
-      <div class="form-group col-md-6">
-        <label for="inputPassword4">Last Name</label>
-        <input
-          type="text"
-          aria-label="Last name"
-          class="form-control"
-          name="lastname"
-          formControlName="lastname"
-          placeholder="Last name"
-          [ngClass]="{
-            'is-invalid':
-              patientForm.controls.lastname.errors?.required &&
-              patientForm.controls.lastname.touched
-          }"
-        />
-        <div
-          *ngIf="patientForm.get('lastname').errors && patientForm.get('lastname').touched"
-          class="text-danger"
-        >
-          Last Name is required
-        </div>
-      </div>
+<form [formGroup]="patientForm" novalidate (ngSubmit)="save(patientForm?.value)">
+  <div class="card border-bottom-0">
+    <div class="card-header">
+      <h4>Contact Details</h4>
     </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inputEmail4">Email</label>
-        <input
-          type="text"
-          aria-label="Email"
-          class="form-control"
-          name="email"
-          formControlName="email"
-          placeholder="Email"
-          [ngClass]="{
-            'is-invalid':
-              (patientForm.get('email').hasError('required') ||
-                patientForm.get('email').hasError('email')) &&
-              patientForm.get('email').touched
-          }"
-        />
-        <div *ngIf="f.email.errors && f.email.touched">
-          <div *ngIf="patientForm.get('email').hasError('required')" class="text-danger">
-            Email is required
+    <div class="card-body">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="firstname">First Name</label>
+          <input
+            type="text"
+            aria-label="First name"
+            class="form-control"
+            name="firstname"
+            #firstname
+            formControlName="firstname"
+            placeholder="First name"
+            [ngClass]="{
+              'is-invalid':
+                patientForm.controls.firstname.errors?.required &&
+                patientForm.controls.firstname.touched
+            }"
+          />
+          <div
+            *ngIf="patientForm.get('firstname').errors && patientForm.get('firstname').touched"
+            class="text-danger"
+          >
+            First Name is required
           </div>
         </div>
-        <div *ngIf="patientForm.get('email').hasError('email')" class="text-danger">
-          Email is in the wrong format
+        <div class="form-group col-md-6">
+          <label for="lastname">Last Name</label>
+          <input
+            type="text"
+            aria-label="Last name"
+            class="form-control"
+            name="lastname"
+            formControlName="lastname"
+            placeholder="Last name"
+            [ngClass]="{
+              'is-invalid':
+                patientForm.controls.lastname.errors?.required &&
+                patientForm.controls.lastname.touched
+            }"
+          />
+          <div
+            *ngIf="patientForm.get('lastname').errors && patientForm.get('lastname').touched"
+            class="text-danger"
+          >
+            Last Name is required
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="email">Email</label>
+          <input
+            type="text"
+            aria-label="Email"
+            class="form-control"
+            name="email"
+            formControlName="email"
+            placeholder="Email"
+            [ngClass]="{
+              'is-invalid':
+                (patientForm.get('email').hasError('required') ||
+                  patientForm.get('email').hasError('email')) &&
+                patientForm.get('email').touched
+            }"
+          />
+          <div *ngIf="patientForm.get('email').errors && patientForm.get('email').touched">
+            <div *ngIf="patientForm.get('email').hasError('required')" class="text-danger">
+              Email is required
+            </div>
+          </div>
+          <div *ngIf="patientForm.get('email').hasError('email')" class="text-danger">
+            Email is in the wrong format
+          </div>
         </div>
       </div>
     </div>
-    <button *ngIf="isNewPatient" type="submit" class="btn btn-primary">Register</button>
-    <button *ngIf="!isNewPatient" type="submit" class="btn btn-primary">Update</button>
-    <a routerLink="/patient/list" class="cancelLink">Cancel</a>
-  </form>
-</div>
+  </div>
+
+  <!-- Addresses -->
+  <div class="card border-bottom-0">
+    <div class="card-header">
+      <h4>Addresses (FormArray of FormGroups example)</h4>
+    </div>
+    <div class="card-body">
+      <div formArrayName="addresses" *ngFor="let address of addressesArray.controls; let i = index">
+        <div [formGroupName]="i" class="mb-4">
+          <div class="row col-md-12 pb-2 pl-2 pt-3 bg-secondary mb-2 mt-1">
+            <h5 class="card-subtitle text-white">
+              Address {{ i + 1 }}
+              <span style="cursor: pointer; font-size: 100%; color:white">
+                <i class="fa fa-trash ml-4" aria-hidden="true" (click)="removeAddress(i)"></i>
+              </span>
+            </h5>
+          </div>
+
+          <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label">Address Type</label>
+            <div class="col-md-8">
+              <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                  <input
+                    class="form-check-input"
+                    [id]="'addressTypeId' + i"
+                    type="radio"
+                    [value]="addressType.Residential"
+                    formControlName="addressType"
+                  />
+                  {{ addressType.Residential }}
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                  <input
+                    class="form-check-input"
+                    [id]="'addressTypeId' + i"
+                    type="radio"
+                    [value]="addressType.Postal"
+                    formControlName="addressType"
+                  />
+                  {{ addressType.Postal }}
+                </label>
+              </div>
+              <div class="invalid-radio">
+                <span *ngIf="this.addressesArray.hasError('sameAddressType')">
+                  The Address Type for both addresses are the same. They have to be different
+                </span>
+              </div>
+              <!-- <div class="invalid-radio" *ngIf="isAddressTypeInvalid()">
+                You need to select either A or B
+              </div> -->
+            </div>
+          </div>
+
+          <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label pt-0">Is primary address</label>
+            <div class="col-md-8">
+              <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                  <input
+                    class="form-check-input"
+                    [id]="'isPrimaryId' + i"
+                    type="checkbox"
+                    [value]=""
+                    formControlName="isPrimary"
+                  />
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row mb-2">
+            <label attr.for="{{ 'streetId' + i }}" class="col-md-2 col-form-label"
+              >Street/PO Box</label
+            >
+            <div class="col-md-8">
+              <input
+                type="text"
+                id="{{ 'streetId' + i }}"
+                formControlName="street"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    addressesArray.get(i + '.street').hasError('required') &&
+                    addressesArray.get(i + '.street').touched
+                }"
+              />
+              <span class="invalid-feedback">
+                <span *ngIf="addressesArray.get(i + '.street')?.hasError('required')">
+                  Street/PO Box is required
+                </span>
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group row mb-2">
+            <label attr.for="{{ 'cityId' + i }}" class="col-md-2 col-form-label">City</label>
+            <div class="col-md-4">
+              <input
+                type="text"
+                id="{{ 'cityId' + i }}"
+                formControlName="city"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    addressesArray.get(i + '.city').hasError('required') &&
+                    addressesArray.get(i + '.city').touched
+                }"
+              />
+              <span class="invalid-feedback">
+                <span *ngIf="addressesArray.get(i + '.city')?.hasError('required')">
+                  City is required
+                </span>
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group row mb-2">
+            <label attr.for="{{ 'stateId' + i }}" class="col-md-2 col-form-label">State</label>
+            <div class="col-md-2">
+              <select
+                type="text"
+                id="{{ 'stateId' + i }}"
+                formControlName="state"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    addressesArray.get(i + '.state').hasError('required') &&
+                    addressesArray.get(i + '.state').touched
+                }"
+              >
+                <option value="" disabled selected hidden class="col-form-label"
+                  >Select a State...
+                </option>
+                <option *ngFor="let state of stateOptions" [value]="state">{{
+                  State[state]
+                }}</option>
+              </select>
+              <span class="invalid-feedback">
+                <span *ngIf="addressesArray.get(i + '.state')?.hasError('required')">
+                  State is required
+                </span>
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group row mb-2">
+            <label attr.for="{{ 'postcodeId' + i }}" class="col-md-2 col-form-label"
+              >Postcode</label
+            >
+            <div class="col-md-2">
+              <input
+                type="text"
+                id="{{ 'postcodeId' + i }}"
+                formControlName="postcode"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    (addressesArray.get(i + '.postcode')?.hasError('required') ||
+                      addressesArray.get(i + '.postcode')?.hasError('maxlength')) &&
+                    addressesArray.get(i + '.postcode').touched
+                }"
+              />
+              <span class="invalid-feedback">
+                <span *ngIf="addressesArray.get(i + '.postcode')?.hasError('required')">
+                  Postcode is required
+                </span>
+                <span *ngIf="addressesArray.get(i + '.postcode')?.hasError('maxlength')">
+                  Postcode must be 4 numbers
+                </span>
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group row mb-2">
+            <label attr.for="{{ 'countryId' + i }}" class="col-md-2 col-form-label">Country</label>
+            <div class="col-md-3">
+              <input
+                type="text"
+                id="{{ 'countryId' + i }}"
+                formControlName="country"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    addressesArray.get(i + '.country')?.hasError('required') &&
+                    addressesArray.get(i + '.country').touched
+                }"
+              />
+              <span class="invalid-feedback">
+                <span *ngIf="addressesArray.get(i + '.country')?.hasError('required')">
+                  Country is required
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 mb-2">
+          <button
+            class="btn btn-outline-secondary btn-sm"
+            type="button"
+            title="Add address"
+            [disabled]="this.addressesArray.length >= 2"
+            (click)="addAddress()"
+          >
+            {{ this.getAddAddressText() }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ailments -->
+  <div class="card">
+    <div class="card-header">
+      <h4>Ailments (FormArray of FormControls example)</h4>
+    </div>
+    <div class="card-body">
+      <div formArrayName="ailments">
+        <div
+          class="form-group row mb-2"
+          *ngFor="let ailment of ailmentsArray.controls; let i = index"
+        >
+          <label class="col-md-2 col-form-label" [attr.for]="i">Ailment {{ i + 1 }}</label>
+          <div class="col-md-8 col-sm-10">
+            <input
+              class="form-control"
+              [id]="i"
+              type="text"
+              [formControlName]="i"
+              [ngClass]="{
+                'is-invalid':
+                  ailmentsArray.at(i)?.hasError('required') && ailmentsArray.at(i).touched
+              }"
+            />
+          </div>
+          <div *ngIf="i !== 0" style="cursor: pointer; font-size: 150%; color: red">
+            <i class="fa fa-trash" aria-hidden="true" (click)="removeAilment(i)"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 mb-2">
+          <button
+            class="btn btn-outline-secondary btn-sm"
+            type="button"
+            title="Add another ailment"
+            [disabled]="!this.ailmentsArray.valid && this.ailmentsArray.length > 0"
+            (click)="addAilment()"
+          >
+            Add ailment
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="!this.patientForm.valid || !this.ailmentsArray.valid"
+      >
+        {{ submitButtonText }}
+      </button>
+      <button class="btn btn-outline-secondary ml-2" [routerLink]="['/patient/list']">
+        Cancel
+      </button>
+    </div>
+  </div>
+</form>
+
+<!-- <br />
+Dirty: {{ patientForm.dirty }} <br />
+Touched: {{ patientForm.touched }} <br />
+Valid:{{ patientForm.valid }} <br />
+Value: {{ patientForm.value | json }} <br />
+Street:{{ addressesArray.get('0.street')?.value }} <br />
+0Street hasError: {{ addressesArray.get('0.street')?.hasError('required') }} <br />
+0AddressType: {{ addressesArray.get('0.addressType')?.value }} <br />
+1AddressType: {{ addressesArray.get('1.addressType')?.value }} <br />
+addressesArray valid?: {{ addressesArray.valid }} <br /> -->

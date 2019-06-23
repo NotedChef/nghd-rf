@@ -1,6 +1,6 @@
 export interface Address {
-  // addressType: AddressType;
-  // isPrimary: boolean;
+  addressType: AddressType;
+  isPrimary: boolean;
   street: string;
   city: string;
   postcode: number;
@@ -10,8 +10,7 @@ export interface Address {
 
 export enum AddressType {
   Postal = 'Postal',
-  Residential = 'Residential',
-  Delivery = 'Delivery'
+  Residential = 'Residential'
 }
 
 export enum State {

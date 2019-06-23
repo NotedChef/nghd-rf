@@ -3,5 +3,5 @@
   <button class="btn btn-success" [routerLink]="['/patient', 'new']">Add Patient</button>
 </div>
 <p></p>
-<nghd-patient-table [patients]="patients$ | async" (patientDelete)="deletePatient($event)">
+<nghd-patient-table [patients]="patients$ | async" (patientDeleted)="deletePatient($event)">
 </nghd-patient-table>

@@ -64,14 +64,15 @@ export class PatientService {
   }
 
   public deletePatient(patient: Patient | number) {
+    console.log('deletePatient in service');
     const id = typeof patient === 'number' ? patient : patient.id;
     this.httpClient
-      .delete<Patient>(this.patientUrl, httpOptions)
+      .delete<Patient>(`${this.patientUrl}/${id}`, httpOptions)
       .pipe(
         tap(() => console.log(`deleted patient with id = ${id}`)),
         catchError(this.handleError('deletePatient'))
       )
-      .subscribe(pt => this.loadPatients());
+      .subscribe(() => this.loadPatients());
   }
 
   public updatePatient(patient: Patient) {

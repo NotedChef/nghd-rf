@@ -7,7 +7,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Westeros County General';
+  title = 'Westeros County General Hospital';
 
   public constructor(private titleService: Title) {
     this.titleService.setTitle(this.title);

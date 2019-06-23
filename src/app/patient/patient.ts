@@ -5,6 +5,6 @@ export interface Patient {
   firstname: string;
   lastname: string;
   email: string;
-  // dob: Date;
+  ailments?: string[];
   addresses: Address[];
 }
